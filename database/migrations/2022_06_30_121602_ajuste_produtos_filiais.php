@@ -48,14 +48,15 @@ return new class extends Migration
      */
     public function down()
     {
-        //adicionar as colunas da tabela produtos
+        //adicionar colunas da tabela produtos
         Schema::table('produtos', function (Blueprint $table) {
             $table->decimal('preco_venda', 8, 2);
             $table->integer('estoque_minimo');
             $table->integer('estoque_maximo');
         });
 
-        Schema::dropIfExists('produtos_filiais');
+        Schema::dropIfExists('produto_filiais');
+
         Schema::dropIfExists('filiais');
     }
 };
