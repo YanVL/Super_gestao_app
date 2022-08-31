@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutoDetalheController;
+use App\Models\PedidoProduto;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +30,6 @@ Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar
 Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(function () {
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('app.home');
     Route::get('/sair', [\App\Http\Controllers\LoginController::class, 'sair'])->name('app.sair');
-    Route::get('/cliente', [\App\Http\Controllers\ClienteController::class, 'index'])->name('app.cliente');
 
     Route::get('/fornecedor', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedor');
     Route::post('/fornecedor/listar', [\App\Http\Controllers\FornecedorController::class, 'listar'])->name('app.fornecedor.listar');
@@ -36,11 +39,11 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(functi
     Route::get('/fornecedor/editar/{id}/{msg?}', [\App\Http\Controllers\FornecedorController::class, 'editar'])->name('app.fornecedor.editar');
     Route::get('/fornecedor/excluir/{id}', [\App\Http\Controllers\FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir');
 
-    //produtos
     Route::resource('produto', ProdutoController::class);
-
-    //produtos detalhes
     Route::resource('produto-detalhe', ProdutoDetalheController::class);
+    Route::resource('cliente', ClienteController::class);
+    Route::resource('pedido', PedidoController::class);
+    Route::resource('pedido-produto', PedidoProdutoController::class);
 
 });
 
